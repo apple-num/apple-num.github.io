@@ -28,18 +28,13 @@ worker/                    랭킹 API (Cloudflare Workers + D1)
 `js/config.js`의 `API_BASE`가 비어 있으면 랭킹 없이 연습 모드로 동작합니다.
 
 ### 2. 랭킹 서버 (처음 한 번)
-```bash
-cd worker
-npx wrangler login
-npx wrangler d1 create apple-num-db      # 출력된 database_id를 wrangler.toml에 입력
-```
-
 저장소 Settings → Secrets and variables → Actions에 아래 두 개를 등록합니다.
-- `CLOUDFLARE_API_TOKEN` (Workers 편집 + D1 편집 권한)
+- `CLOUDFLARE_API_TOKEN` (Workers Scripts 편집 + D1 편집 권한)
 - `CLOUDFLARE_ACCOUNT_ID`
 
-이후 `worker/` 변경을 push하면 GitHub Actions가 마이그레이션과 배포를 실행합니다.
-(Actions 탭에서 "Deploy ranking worker"를 수동 실행해도 됩니다.)
+그다음 Actions 탭에서 "Deploy ranking worker"를 실행(Run workflow)하면
+D1 데이터베이스 생성(없을 때만) → 테이블 마이그레이션 → 워커 배포까지 자동으로 진행됩니다.
+이후에는 `worker/`나 `shared/` 변경을 push할 때마다 자동 배포됩니다.
 
 ### 3. 연결
 배포된 워커 주소(`https://apple-num-api.<서브도메인>.workers.dev`)를 `js/config.js`의 `API_BASE`에 넣고 push합니다.
