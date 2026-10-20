@@ -1,0 +1,13 @@
+name = "apple-num-api"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://apple-num.github.io"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "apple-num-db"
+# `npx wrangler d1 create apple-num-db` 실행 후 나오는 database_id로 바꿔 주세요.
+database_id = "REPLACE_WITH_DATABASE_ID"
+migrations_dir = "migrations"

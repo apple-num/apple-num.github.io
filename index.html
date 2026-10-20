@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f7efe0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="description" content="사과 숫자를 묶어 합 10을 만드는 퍼즐" />
+  <title>애플넘 · 합 10 퍼즐</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="hud" aria-label="게임 상태">
+      <div class="hud-item">
+        <span class="hud-label">점수</span>
+        <span class="hud-value" id="score">0</span>
+      </div>
+      <div class="hud-sum" id="sumBadge" aria-live="polite">
+        <span class="hud-label">합</span>
+        <span class="hud-value" id="sumValue">–</span>
+      </div>
+      <div class="hud-item hud-time">
+        <span class="hud-label">남은 시간</span>
+        <span class="hud-value" id="timeText">120</span>
+      </div>
+      <div class="timebar" aria-hidden="true"><div class="timebar-fill" id="timeFill"></div></div>
+    </header>
+
+    <main class="stage" id="stage">
+      <div class="board" id="board" role="grid" aria-label="사과 판">
+        <div class="selection" id="selection" hidden></div>
+      </div>
+    </main>
+
+    <!-- 시작 화면 -->
+    <section class="overlay" id="startScreen">
+      <div class="card">
+        <div class="logo" aria-hidden="true">
+          <span class="apple big"><span class="num">10</span></span>
+        </div>
+        <h1>애플넘</h1>
+        <p class="sub">사과를 묶어서 합을 <b>10</b>으로!</p>
+        <ul class="howto">
+          <li>드래그로 네모를 그려 사과를 감싸요.</li>
+          <li>안에 든 숫자 합이 정확히 10이면 사과가 사라져요.</li>
+          <li>지운 사과 1개당 1점, 제한 시간은 2분이에요.</li>
+        </ul>
+        <div class="best" id="bestText"></div>
+        <button class="btn primary" id="startBtn">시작하기</button>
+        <button class="btn ghost" id="rankBtn1">랭킹 보기</button>
+      </div>
+    </section>
+
+    <!-- 결과 화면 -->
+    <section class="overlay" id="resultScreen" hidden>
+      <div class="card">
+        <p class="result-title" id="resultTitle">시간 종료!</p>
+        <div class="result-score"><span id="resultScore">0</span><small>점</small></div>
+        <p class="result-sub" id="resultSub"></p>
+
+        <form class="submit-form" id="submitForm" hidden>
+          <label for="initials">이니셜 3글자로 랭킹 등록</label>
+          <div class="submit-row">
+            <input id="initials" name="initials" maxlength="3" autocomplete="off" autocapitalize="characters"
+                   spellcheck="false" placeholder="ABC" pattern="[A-Za-z]{3}" required />
+            <button class="btn primary small" type="submit" id="submitBtn">등록</button>
+          </div>
+          <p class="form-msg" id="formMsg"></p>
+        </form>
+
+        <button class="btn primary" id="retryBtn">다시 하기</button>
+        <button class="btn ghost" id="rankBtn2">랭킹 보기</button>
+      </div>
+    </section>
+
+    <!-- 랭킹 -->
+    <section class="overlay" id="rankScreen" hidden>
+      <div class="card rank-card">
+        <div class="rank-head">
+          <h2>랭킹</h2>
+          <button class="icon-btn" id="rankClose" aria-label="닫기">✕</button>
+        </div>
+        <div class="tabs" role="tablist">
+          <button class="tab active" role="tab" data-period="week">이번 주</button>
+          <button class="tab" role="tab" data-period="all">전체</button>
+        </div>
+        <ol class="rank-list" id="rankList"></ol>
+        <p class="rank-note">이번 주 랭킹은 매주 월요일 0시(한국 시간)에 초기화돼요.</p>
+      </div>
+    </section>
+
+    <div class="toast" id="toast" hidden></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
