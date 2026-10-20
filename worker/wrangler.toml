@@ -8,6 +8,7 @@ ALLOWED_ORIGINS = "https://apple-num.github.io"
 [[d1_databases]]
 binding = "DB"
 database_name = "apple-num-db"
-# `npx wrangler d1 create apple-num-db` 실행 후 나오는 database_id로 바꿔 주세요.
+# GitHub Actions가 배포할 때 실제 ID로 채워 넣습니다 (없으면 DB를 새로 만듦).
+# 로컬에서 직접 배포할 때만 실제 ID로 바꿔 주세요.
 database_id = "REPLACE_WITH_DATABASE_ID"
 migrations_dir = "migrations"
